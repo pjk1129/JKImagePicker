@@ -593,6 +593,12 @@ static NSString *kJKAssetsFooterViewIdentifier = @"kJKAssetsFooterViewIdentifier
 #pragma mark - JKAssetsViewCellDelegate
 - (void)startPhotoAssetsViewCell:(JKAssetsViewCell *)assetsCell
 {
+    if (self.selectedAssetArray.count>=self.maximumNumberOfSelection) {
+        NSString  *str = [NSString stringWithFormat:@"最多选择%lu张照片",self.maximumNumberOfSelection];
+        [JKPromptView showWithImageName:@"picker_alert_sigh" message:str];
+        return;
+    }
+    
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         UIImagePickerController *pickerController = [[UIImagePickerController alloc]init];
         pickerController.allowsEditing = NO;
